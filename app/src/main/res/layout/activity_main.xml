@@ -66,7 +66,7 @@
         android:layout_alignParentBottom="true"
         android:gravity="center"
         android:id="@+id/szo"
-        android:textSize="30sp"/>
-
+        android:textSize="30sp"
+        android:letterSpacing="0.5"/>
 
 </RelativeLayout>

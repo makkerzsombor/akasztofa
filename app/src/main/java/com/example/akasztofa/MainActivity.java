@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,12 +20,15 @@ public class MainActivity extends AppCompatActivity {
     private TextView betu;
     private TextView szo;
     private ImageView kep;
+    private ImageView[] kepek;
     private ArrayList<String> szavak = new ArrayList<String>();
     private String gondoltSzo;
     private Random rnd = new Random();
     private ArrayList <String> betuk = new ArrayList<String>();
     private ArrayList <String> voltBetuk = new ArrayList<String>();
     private int index;
+    private String tippBetu;
+    private int hibak;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,10 +83,10 @@ public class MainActivity extends AppCompatActivity {
         szo = findViewById(R.id.szo);
         kep = findViewById(R.id.kep);
         index = 0;
+        hibak = 0;
     }
 
     private void setSzo(){
-        //TODO: szavakbol random + '_'-ak kirajzolása.
         szavak.add("alma");
         szavak.add("korte");
         szavak.add("banan");
@@ -94,12 +98,12 @@ public class MainActivity extends AppCompatActivity {
         szavak.add("ribizli");
         szavak.add("afonya");
         int r = rnd.nextInt(10) + 1;
-        gondoltSzo = szavak.get(r);
+        gondoltSzo = szavak.get(r).toUpperCase();
         // Also vonalak:
         for (int i = 0; i < gondoltSzo.length(); i++) {
             szo.append("_");
-            szo.append(" ");
         }
+        szo.append(gondoltSzo);
     }
     private void betukFeltolt(){
         betuk.clear();
@@ -130,6 +134,62 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void tippeles(){
-
+        //TODO: win condition
+        StringBuilder sb = new StringBuilder(szo.getText());
+        CharSequence tippBetu = betu.getText();
+        if (gondoltSzo.contains(tippBetu)){
+            for (int i = 0; i < gondoltSzo.length(); i++) {
+                if (gondoltSzo.charAt(i) == tippBetu.charAt(0)){
+                    char ch = tippBetu.charAt(0);
+                    sb.setCharAt(i, ch);
+                }
+            }
+            szo.setText(sb);
+        }else {
+            hibak++;
+            switch (hibak) {
+                case 1:
+                    kep.setImageResource(R.drawable.akasztofa01);
+                    break;
+                case 2:
+                    kep.setImageResource(R.drawable.akasztofa02);
+                    break;
+                case 3:
+                    kep.setImageResource(R.drawable.akasztofa03);
+                    break;
+                case 4:
+                    kep.setImageResource(R.drawable.akasztofa04);
+                    break;
+                case 5:
+                    kep.setImageResource(R.drawable.akasztofa05);
+                    break;
+                case 6:
+                    kep.setImageResource(R.drawable.akasztofa06);
+                    break;
+                case 7:
+                    kep.setImageResource(R.drawable.akasztofa07);
+                    break;
+                case 8:
+                    kep.setImageResource(R.drawable.akasztofa08);
+                    break;
+                case 9:
+                    kep.setImageResource(R.drawable.akasztofa09);
+                    break;
+                case 10:
+                    kep.setImageResource(R.drawable.akasztofa10);
+                    break;
+                case 11:
+                    kep.setImageResource(R.drawable.akasztofa11);
+                    break;
+                case 12:
+                    kep.setImageResource(R.drawable.akasztofa12);
+                    break;
+                case 13:
+                    kep.setImageResource(R.drawable.akasztofa13);
+                    //TODO: vereség
+                    break;
+            }
+        }
+        voltBetuk.add(betu.toString());
     }
 }
