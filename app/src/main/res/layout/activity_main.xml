@@ -31,9 +31,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="A"
-                android:textSize="20sp"
+                android:textSize="30sp"
                 android:layout_marginStart="10sp"
-                android:layout_marginEnd="10sp"/>
+                android:layout_marginEnd="10sp"
+                android:id="@+id/betu"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_height="50dp"
@@ -48,20 +49,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tippel"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:id="@+id/btnTipp"/>
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/akasztofa00"/>
+            android:src="@drawable/akasztofa00"
+            android:id="@+id/kep"/>
     </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ASD"
+        android:text=""
         android:layout_alignParentBottom="true"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:id="@+id/szo"
+        android:textSize="30sp"/>
 
 
 </RelativeLayout>
