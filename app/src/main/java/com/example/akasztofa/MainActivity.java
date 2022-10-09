@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //TODO: tippelés kulon methoddal kellene. (1.)
+                tippeles();
             }
         });
     }
@@ -126,5 +127,9 @@ public class MainActivity extends AppCompatActivity {
         betuk.add("X");
         betuk.add("Y");
         betuk.add("Z");
+    }
+
+    private void tippeles(){
+
     }
 }
