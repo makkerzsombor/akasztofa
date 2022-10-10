@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView betu;
     private TextView szo;
     private ImageView kep;
-    private ImageView[] kepek;
     private ArrayList<String> szavak = new ArrayList<String>();
     private String gondoltSzo;
     private Random rnd = new Random();
@@ -43,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         btnPlusz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: ha volt a betu szinezze (2.)
                 index++;
                 if (index > 23){
                     index = 0;
@@ -51,18 +49,29 @@ public class MainActivity extends AppCompatActivity {
                 }else {
                     betu.setText(betuk.get(index));
                 }
+                //Szinezes:
+                if (voltBetuk.contains(betu.getText().toString())){
+                    betu.setTextColor(Color.BLACK);
+                }else{
+                    betu.setTextColor(Color.RED);
+                }
             }
         });
         btnMinusz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: ha volt a betu szinezze (2.)
                 index--;
-                if (index <= 0){
+                if (index < 0){
                     index = 23;
                     betu.setText(betuk.get(index));
                 }else {
                     betu.setText(betuk.get(index));
+                }
+                //Szinezes
+                if (voltBetuk.contains(betu.getText().toString())){
+                    betu.setTextColor(Color.BLACK);
+                }else{
+                    betu.setTextColor(Color.RED);
                 }
             }
         });
@@ -86,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
         kep = findViewById(R.id.kep);
         index = 0;
         hibak = 0;
+        voltBetuk.clear();
     }
 
     private void setSzo(){
@@ -108,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
         }
         Toast.makeText(this, gondoltSzo, Toast.LENGTH_SHORT).show();
     }
+
     private void betukFeltolt(){
         betuk.clear();
         betuk.add("A");
@@ -227,7 +238,8 @@ public class MainActivity extends AppCompatActivity {
             });
             jatekVegeDialogBuilder.create().show();
         }
-        voltBetuk.add(betu.toString());
+        //Itt adom hozzá a listához:
+        voltBetuk.add(betu.getText().toString());
     }
 
     private void ujJatek(){
