@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setSzo(){
+        szo.setText("");
         szavak.add("alma");
         szavak.add("korte");
         szavak.add("banan");
@@ -200,15 +201,13 @@ public class MainActivity extends AppCompatActivity {
                     jatekVegeDialogBuilder.setPositiveButton("Igen", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            //TODO: új játék generálása
+                            ujJatek();
                         }
                     });
                     jatekVegeDialogBuilder.create().show();
                     break;
             }
         }
-        Toast.makeText(MainActivity.this, szo.getText(), Toast.LENGTH_SHORT).show();
-        Toast.makeText(MainActivity.this, gondoltSzo, Toast.LENGTH_SHORT).show();
         if (szo.getText().toString().equals(gondoltSzo)){
             jatekVegeDialogBuilder = new AlertDialog.Builder(this);
             jatekVegeDialogBuilder.setTitle("Helyes megfejtés!");
@@ -223,11 +222,22 @@ public class MainActivity extends AppCompatActivity {
             jatekVegeDialogBuilder.setPositiveButton("Igen", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    //TODO: új játék generálása
+                    ujJatek();
                 }
             });
             jatekVegeDialogBuilder.create().show();
         }
         voltBetuk.add(betu.toString());
+    }
+
+    private void ujJatek(){
+        kep.setImageResource(R.drawable.akasztofa00);
+        szavak.clear();
+        betu.setText("A");
+        index = 0;
+        hibak = 0;
+        betu.setTextColor(Color.RED);
+        voltBetuk.clear();
+        setSzo();
     }
 }
