@@ -1,13 +1,16 @@
 package com.example.akasztofa;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -27,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList <String> betuk = new ArrayList<String>();
     private ArrayList <String> voltBetuk = new ArrayList<String>();
     private int index;
-    private String tippBetu;
     private int hibak;
+    private AlertDialog.Builder jatekVegeDialogBuilder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
         btnTipp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: tippelés kulon methoddal kellene. (1.)
                 tippeles();
             }
         });
@@ -103,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < gondoltSzo.length(); i++) {
             szo.append("_");
         }
-        szo.append(gondoltSzo);
+        Toast.makeText(this, gondoltSzo, Toast.LENGTH_SHORT).show();
     }
     private void betukFeltolt(){
         betuk.clear();
@@ -134,7 +136,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void tippeles(){
-        //TODO: win condition
         StringBuilder sb = new StringBuilder(szo.getText());
         CharSequence tippBetu = betu.getText();
         if (gondoltSzo.contains(tippBetu)){
@@ -186,9 +187,46 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 13:
                     kep.setImageResource(R.drawable.akasztofa13);
-                    //TODO: vereség
+                    jatekVegeDialogBuilder = new AlertDialog.Builder(this);
+                    jatekVegeDialogBuilder.setTitle("Nem sikerült kitalálni!");
+                    jatekVegeDialogBuilder.setMessage("Szeretnél még egyet játszani?");
+                    jatekVegeDialogBuilder.setCancelable(false);
+                    jatekVegeDialogBuilder.setNegativeButton("Nem", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            finish();
+                        }
+                    });
+                    jatekVegeDialogBuilder.setPositiveButton("Igen", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //TODO: új játék generálása
+                        }
+                    });
+                    jatekVegeDialogBuilder.create().show();
                     break;
             }
+        }
+        Toast.makeText(MainActivity.this, szo.getText(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this, gondoltSzo, Toast.LENGTH_SHORT).show();
+        if (szo.getText().toString().equals(gondoltSzo)){
+            jatekVegeDialogBuilder = new AlertDialog.Builder(this);
+            jatekVegeDialogBuilder.setTitle("Helyes megfejtés!");
+            jatekVegeDialogBuilder.setMessage("Szeretnél még egyet játszani?");
+            jatekVegeDialogBuilder.setCancelable(false);
+            jatekVegeDialogBuilder.setNegativeButton("Nem", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    finish();
+                }
+            });
+            jatekVegeDialogBuilder.setPositiveButton("Igen", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    //TODO: új játék generálása
+                }
+            });
+            jatekVegeDialogBuilder.create().show();
         }
         voltBetuk.add(betu.toString());
     }
