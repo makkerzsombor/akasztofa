@@ -239,6 +239,7 @@ public class MainActivity extends AppCompatActivity {
         }
         //Itt adom hozzá a listához:
         voltBetuk.add(betu.getText().toString());
+        betu.setTextColor(Color.BLACK);
     }
 
     private void ujJatek(){
